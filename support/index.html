@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PackSnap Support</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #1B263B;
+      --orange: #FF7B00;
+      --sage:   #84A59D;
+      --sand:   #E0E1DD;
+      --slate:  #415A77;
+      --white:  #FFFFFF;
+      --cardBg: #F4F4F2;
+      --radius: 14px;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--sand);
+      color: var(--navy);
+      min-height: 100vh;
+      padding: 0 16px 60px;
+    }
+
+    /* HEADER */
+    header {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 48px 0 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .logo-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--orange);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-icon svg {
+      width: 26px;
+      height: 26px;
+      fill: none;
+      stroke: white;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .logo-text {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+      color: var(--navy);
+    }
+
+    .logo-text span {
+      color: var(--orange);
+    }
+
+    header p {
+      color: var(--slate);
+      font-size: 15px;
+      line-height: 1.5;
+      max-width: 480px;
+    }
+
+    /* MAIN */
+    main {
+      max-width: 680px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* CONTACT CARD */
+    .contact-card {
+      background: var(--navy);
+      border-radius: var(--radius);
+      padding: 28px;
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .contact-card-text h2 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .contact-card-text p {
+      font-size: 14px;
+      color: var(--sage);
+    }
+
+    .contact-card a {
+      display: inline-block;
+      background: var(--orange);
+      color: var(--white);
+      font-weight: 600;
+      font-size: 14px;
+      padding: 10px 22px;
+      border-radius: 8px;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: opacity 0.15s;
+    }
+
+    .contact-card a:hover { opacity: 0.88; }
+
+    /* SECTION LABEL */
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--slate);
+      padding: 20px 0 4px;
+    }
+
+    /* FAQ */
+    .faq-card {
+      background: var(--white);
+      border: 1px solid var(--sand);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    details {
+      border-bottom: 1px solid var(--sand);
+    }
+
+    details:last-child {
+      border-bottom: none;
+    }
+
+    summary {
+      padding: 18px 22px;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      user-select: none;
+      color: var(--navy);
+      transition: background 0.1s;
+    }
+
+    summary:hover { background: var(--cardBg); }
+
+    summary::after {
+      content: '+';
+      font-size: 20px;
+      font-weight: 300;
+      color: var(--sage);
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+
+    details[open] summary::after {
+      transform: rotate(45deg);
+    }
+
+    details[open] summary {
+      color: var(--orange);
+    }
+
+    .faq-body {
+      padding: 16px 22px 18px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--slate);
+      border-top: 1px solid var(--sand);
+    }
+
+    .faq-body a {
+      color: var(--orange);
+      text-decoration: none;
+    }
+
+    .faq-body strong {
+      color: var(--navy);
+      font-weight: 600;
+    }
+
+    /* TIPS GRID */
+    .tips-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    @media (max-width: 500px) {
+      .tips-grid { grid-template-columns: 1fr; }
+    }
+
+    .tip-card {
+      background: var(--white);
+      border: 1px solid var(--sand);
+      border-radius: var(--radius);
+      padding: 20px;
+      transition: border-color 0.15s;
+    }
+
+    .tip-card:hover {
+      border-color: var(--sage);
+    }
+
+    .tip-icon {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .tip-card h3 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--navy);
+    }
+
+    .tip-card p {
+      font-size: 13px;
+      color: var(--slate);
+      line-height: 1.55;
+    }
+
+    /* FOOTER */
+    footer {
+      max-width: 680px;
+      margin: 40px auto 0;
+      text-align: center;
+      font-size: 13px;
+      color: var(--slate);
+    }
+
+    footer a {
+      color: var(--sage);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: var(--orange);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo-row">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24">
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+          <path d="M3 9h18"/>
+          <path d="M9 21V9"/>
+        </svg>
+      </div>
+      <div class="logo-text">Pack<span>Snap</span> Support</div>
+    </div>
+    <p>Need help? We're here for you. Browse the FAQs below or send us a message — we respond within 48 hours.</p>
+  </header>
+
+  <main>
+
+    <!-- CONTACT -->
+    <div class="contact-card">
+      <div class="contact-card-text">
+        <h2>Get in touch</h2>
+        <p>We typically respond within 48 hours.</p>
+      </div>
+      <a href="mailto:support@getpacksnap.com">Email Support</a>
+    </div>
+
+    <!-- FAQ -->
+    <div class="section-label">Frequently Asked Questions</div>
+
+    <div class="faq-card">
+
+      <details>
+        <summary>How do I add a new box?</summary>
+        <div class="faq-body">
+          Tap the <strong>+</strong> button on the home screen and select <strong>New Box</strong>. Give your box a name and optional description, then tap <strong>Save</strong>. You can start adding items to it right away.
+        </div>
+      </details>
+
+      <details>
+        <summary>How does the AI scanning work?</summary>
+        <div class="faq-body">
+          Point your camera at any item and tap the scan button. PackSnap's AI will identify what it sees and suggest a label. You can confirm with one tap or edit the label before saving.
+        </div>
+      </details>
+
+      <details>
+        <summary>How do I generate and print a QR code for a box?</summary>
+        <div class="faq-body">
+          Open any box and tap the <strong>QR Code</strong> button in the top right. You can share the QR image directly to AirDrop, Messages, or your photo library, then print it from there. Stick it on your box — scanning it will instantly show everything inside.
+        </div>
+      </details>
+
+      <details>
+        <summary>Is my data backed up?</summary>
+        <div class="faq-body">
+          Yes. PackSnap automatically syncs your inventory to the cloud whenever you're connected to Wi-Fi or cellular. Your data is accessible from any device logged in to your account.
+        </div>
+      </details>
+
+      <details>
+        <summary>What's included in PackSnap Pro?</summary>
+        <div class="faq-body">
+          PackSnap Pro unlocks unlimited boxes, unlimited items, multi-item scanning, and unlimited AI scans. The free version includes a limited number of boxes and AI scans to get you started.
+        </div>
+      </details>
+
+      <details>
+        <summary>How do I restore a purchase?</summary>
+        <div class="faq-body">
+          Go to <strong>Settings → PackSnap Pro → Restore Purchase</strong>. Make sure you're signed in to the same Apple ID used when you originally purchased. If the issue persists, <a href="mailto:support@getpacksnap.com">contact us</a> and we'll sort it out.
+        </div>
+      </details>
+
+      <details>
+        <summary>I found a bug. How do I report it?</summary>
+        <div class="faq-body">
+          Email us at <a href="mailto:support@getpacksnap.com">support@getpacksnap.com</a> with a brief description of what happened and your device model (e.g., iPhone 15). Screenshots are always helpful. We take every bug report seriously.
+        </div>
+      </details>
+
+    </div>
+
+    <!-- TIPS -->
+    <div class="section-label">Quick Tips</div>
+
+    <div class="tips-grid">
+      <div class="tip-card">
+        <div class="tip-icon">📸</div>
+        <h3>Better scans</h3>
+        <p>Good lighting makes a big difference. Lay items flat on a clean surface for the most accurate AI identification.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🏷️</div>
+        <h3>Label your boxes first</h3>
+        <p>Create and name all your boxes before scanning items. It's faster to assign items to existing boxes as you go.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🔍</div>
+        <h3>Search anything</h3>
+        <p>The search bar finds items across all boxes at once. Try searching by item type, color, or room.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">📦</div>
+        <h3>QR codes stick best</h3>
+        <p>Print QR labels on sticker paper and place them on the short side of boxes — easy to spot when stacked.</p>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>© 2026 PackSnap · <a href="mailto:support@getpacksnap.com">support@getpacksnap.com</a></p>
+  </footer>
+
+</body>
+</html>
